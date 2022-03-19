@@ -42,6 +42,9 @@ const Router: React.FC = () => {
       <ProtectedRoute path="/files">
         <Files />
       </ProtectedRoute>
+      <ProtectedRoute path="/streams">
+        <Streams />
+      </ProtectedRoute>
       <Route path="/uipatterns">
         <SectionHeader>UI Patterns</SectionHeader>
         <UIPatterns />
