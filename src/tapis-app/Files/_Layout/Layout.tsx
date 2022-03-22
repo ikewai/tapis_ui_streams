@@ -16,7 +16,9 @@ import { FilesProvider } from '../_components/FilesContext';
 
 const Layout: React.FC = () => {
   const { pathname } = useLocation();
+  console.log(pathname);
   const crumbs = breadcrumbsFromPathname(pathname).splice(1);
+  console.log(crumbs);
   const header = (
     <LayoutHeader>
       <div className={styles.breadcrumbs}>

@@ -39,7 +39,7 @@
     "uuid": "^7.0.2",
     "web-vitals": "^1.1.2"
   },
-  "homepage": "https://tapis-project.github.io/tapis-ui",
+  "homepage": "https://ikewai.github.io/tapi_ui_streams_pages/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

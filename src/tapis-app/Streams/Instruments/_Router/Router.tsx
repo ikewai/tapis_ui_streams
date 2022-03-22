@@ -16,7 +16,7 @@ const Router: React.FC<{ projectId: string; siteId: string }> = ({
 
   return (
     <Switch>
-      <Route path={`${path}`} exact>
+      <Route path={path} exact>
         <SectionMessage type="info">
           Select an instrument from the list.
         </SectionMessage>

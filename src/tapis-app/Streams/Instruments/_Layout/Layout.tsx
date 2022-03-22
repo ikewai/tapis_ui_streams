@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   PageLayout,
-  LayoutHeader,
   LayoutNavWrapper,
   LayoutBody,
 } from 'tapis-ui/_common';
@@ -12,12 +11,6 @@ const Layout: React.FC<{ projectId: string; siteId: string }> = ({
   projectId,
   siteId,
 }) => {
-  const header = (
-    <LayoutHeader>
-      <div>Instruments</div>
-    </LayoutHeader>
-  );
-
   const sidebar = (
     <LayoutNavWrapper>
       <InstrumentsNav projectId={projectId} siteId={siteId} />
@@ -30,7 +23,7 @@ const Layout: React.FC<{ projectId: string; siteId: string }> = ({
     </LayoutBody>
   );
 
-  return <PageLayout top={header} left={sidebar} right={body} />;
+  return <PageLayout left={sidebar} right={body} />;
 };
 
 export default Layout;

@@ -4,6 +4,7 @@ import { useList } from 'tapis-hooks/streams/sites';
 import { Streams } from '@tapis/tapis-typescript';
 import { Navbar, NavItem } from 'tapis-ui/_wrappers/Navbar';
 import { QueryWrapper } from 'tapis-ui/_wrappers';
+import { joinPath } from "utils/URLManager";
 
 const SitesNav: React.FC<{ projectId: string }> = ({ projectId }) => {
   const { url } = useRouteMatch();
@@ -16,15 +17,18 @@ const SitesNav: React.FC<{ projectId: string }> = ({ projectId }) => {
     <QueryWrapper isLoading={isLoading} error={error}>
       <Navbar>
         {definitions.length ? (
-          definitions.map((site) => (
-            <NavItem
-              to={`${url}/${site.site_name}`}
-              icon="sites"
-              key={site.site_name}
-            >
-              {`${site.site_name}`}
-            </NavItem>
-          ))
+          definitions.map((site) => {
+            const path = joinPath([url, site.site_name!]);
+            return (
+              <NavItem
+                to={path}
+                icon="sites"
+                key={site.site_name}
+              >
+                {`${site.site_name}`}
+              </NavItem>
+            );
+          })
         ) : (
           <i>No sites found</i>
         )}
