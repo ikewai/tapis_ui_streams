@@ -13,6 +13,8 @@ const Layout: React.FC<{
     projectId,
     siteId,
     instId: instrumentId,
+    startDate: "2012-01-01",
+    endDate: "2023-01-01"
   });
 
   const { instrument, site, measurements_in_file, ...measurements } =

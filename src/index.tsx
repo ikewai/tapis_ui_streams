@@ -8,7 +8,7 @@ import 'tapis-ui/index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TapisProvider basePath="https://dev.develop.tapis.io">
+    <TapisProvider basePath="https://tacc.tapis.io">
       <Router>
         <App />
       </Router>

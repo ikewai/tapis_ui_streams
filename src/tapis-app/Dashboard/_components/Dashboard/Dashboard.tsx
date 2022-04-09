@@ -122,7 +122,7 @@ const Dashboard: React.FC = () => {
               name="Streams"
               text="View TAPIS streams projects"
               link="/streams"
-              counter={`${projects?.data?.result?.length} projects`}
+              counter={`${projects?.data?.result?.length || 0} projects`}
               loading={projects?.isLoading}
             />
           </>

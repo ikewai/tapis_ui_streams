@@ -20,7 +20,7 @@ const Layout: React.FC = () => {
 
   return (
     <NotificationsProvider>
-      <div style={{ display: 'flex', flexGrow: 1, height: '100vh' }}>
+      <div style={{ display: 'flex', flexGrow: 1, height: '100%', minHeight: '100vh' }}>
         <PageLayout top={header} left={<Sidebar />} right={workbenchContent} />
       </div>
     </NotificationsProvider>
