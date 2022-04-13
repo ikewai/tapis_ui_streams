@@ -19,11 +19,23 @@
   max-height: 0;
   opacity: 0;
   overflow-y: hidden;
-  transition: all 1s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .graph-container.graph-container-expand {
   max-height: 400px;
   opacity: 1;
-  transition: all 1s ease-in;
+  transition: all 0.5s ease-in;
+}
+
+.graph-toggle {
+  background-color: #dfdaf5;
+  width: 100%;
+  height: 30px;
+}
+
+.graph-toggle-label {
+  padding-left: 10px;
+  line-height: 30px;
+  font-weight: bold;
 }

@@ -1,27 +1,43 @@
 import { useList } from 'tapis-hooks/streams/measurements';
 import Measurements from '../_components/Measurements';
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Layout.module.scss';
 import { QueryWrapper } from 'tapis-ui/_wrappers';
+import { Streams } from '@tapis/tapis-typescript';
 
 const Layout: React.FC<{
   projectId: string;
   siteId: string;
   instrumentId: string;
-}> = ({ projectId, siteId, instrumentId }) => {
-  const { data, isLoading, error } = useList({
+  start?: Date;
+  end?: Date;
+  limit?: number;
+  offset?: number;
+}> = ({ projectId, siteId, instrumentId, start, end, limit, offset }) => {
+  let payload: Streams.ListMeasurementsRequest = {
     projectId,
     siteId,
-    instId: instrumentId,
-    startDate: "2012-01-01",
-    endDate: "2023-01-01"
-  });
+    instId: instrumentId
+  }
+  if(start) {
+    payload.startDate = start.toISOString();
+  }
+  if(end) {
+    payload.endDate = end.toISOString();
+  }
+  if(limit !== undefined) {
+    payload.limit = limit;
+  }
+  if(offset !== undefined) {
+    payload.offset = offset;
+  }
+
+  const { data, isLoading, error } = useList(payload);
 
   const { instrument, site, measurements_in_file, ...measurements } =
     data?.result ?? {};
 
   const variables = Object.keys(measurements);
-  const [selected, setSelected] = useState<number>(-1);
 
   return (
     <QueryWrapper isLoading={isLoading} error={error}>
@@ -30,7 +46,6 @@ const Layout: React.FC<{
           variables.map((variable: string, index: number) => {
             const id = `${index}`;
             let variableMeasurements = measurements[variable];
-
             return (
               <Measurements
                 key={id}
@@ -38,10 +53,6 @@ const Layout: React.FC<{
                 variable={variable}
                 graphWidth={600}
                 measurements={variableMeasurements}
-                select={() => {
-                  setSelected(selected === index ? -1 : index);
-                }}
-                selected={selected === index}
               />
             );
           })

@@ -10,7 +10,6 @@ const pathTypes = ["Projects", "Sites", "Instruments"];
 const Layout: React.FC = () => {
   const { pathname } = useLocation();
   const crumbs = breadcrumbsFromPathname(pathname).slice(0, 3);
-  console.log(crumbs);
   const pathType = pathTypes[crumbs.length - 1];
 
   const header = (
