@@ -22,7 +22,7 @@ const SitesNav: React.FC<{ projectId: string }> = ({ projectId }) => {
             return (
               <NavItem
                 to={path}
-                icon="sites"
+                icon="project"
                 key={site.site_name}
               >
                 {`${site.site_name}`}

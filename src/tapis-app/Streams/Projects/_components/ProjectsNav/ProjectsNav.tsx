@@ -21,7 +21,7 @@ const ProjectsNav: React.FC = () => {
             return (
               <NavItem
                 to={path}
-                icon="projects"
+                icon="project"
                 key={project.project_name}
               >
                 {`${project.project_name}`}

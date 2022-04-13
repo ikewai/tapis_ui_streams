@@ -18,6 +18,7 @@ const Measurements: React.FC<{
   const [measurementsCollapsed, setMeasurementsCollapsed] = useState<boolean>(true);
   const [fullMeasurementsList, setFullMeasurementsList] = useState<string[]>([]);
   const [collapsedMeasurementsList, setCollapsedMeasurementsList] = useState<string[]>([]);
+  const [variableLabel, setVariableLabel] = useState<string>("");
 
   useEffect(() => {
     let fullMeasurements = Object.entries(measurements).map((entry: [string, number]) => {
@@ -33,7 +34,10 @@ const Measurements: React.FC<{
     setCollapsedMeasurementsList(collapsedMeasurements);
   }, [measurements, measurementsCollapsed]);
 
-  
+  useEffect(() => {
+    let capitalizedVariable = `${variable.charAt(0).toUpperCase()}${variable.slice(1)}`;
+    setVariableLabel(capitalizedVariable);
+  }, [variable])
 
   const toggleGraph = () => {
     setGraph(!showGraph);
@@ -65,7 +69,9 @@ const Measurements: React.FC<{
           <MeasurementsPlot measurements={measurements} layout={plotlyLayout} />
         </div>
       </div>
-      {`${variable}`}
+      <div className={styles['variable-label']}>
+        {`${variableLabel}`}
+      </div>
       <div className={styles['measurements-list']} onClick={toggleMeasurements}>
         {
           measurementsList.map((entry: string) => {

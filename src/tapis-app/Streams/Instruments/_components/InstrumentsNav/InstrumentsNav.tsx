@@ -27,7 +27,7 @@ const InstrumentsNav: React.FC<{ projectId: string; siteId: string }> = ({
             return (
               <NavItem
                 to={path}
-                icon="instruments"
+                icon="project"
                 key={instrument.inst_name}
               >
                 {`${instrument.inst_name}`}

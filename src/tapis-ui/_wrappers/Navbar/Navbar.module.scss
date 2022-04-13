@@ -3,13 +3,13 @@ $core-portal-color-primary: #9d85ef;
 .nav-list {
   --horizontal-buffer: var(--global-space--section-left);
   --vertical-buffer: 0.75rem;
-  --min-width: 100%;
+  width: fit-content;
   list-style: none;
   flex-direction: column;
 }
 
 .nav-link {
-  min-width: var(--min-width);
+  min-width: 100%;
   border: none;
   padding: 0.5rem 1rem;
   padding-left: var(--horizontal-buffer);
@@ -18,7 +18,7 @@ $core-portal-color-primary: #9d85ef;
   display: block;
 }
 .nav-link:hover {
-  color: #707070;
+  color: $core-portal-color-primary;
   text-decoration: none;
 }
 
