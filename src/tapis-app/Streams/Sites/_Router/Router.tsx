@@ -9,7 +9,6 @@ import { SitesNav } from '../_components';
 import Instruments from '../../Instruments';
 
 const Router: React.FC<{ projectId: string }> = ({ projectId }) => {
-
   const { path } = useRouteMatch();
 
   return (

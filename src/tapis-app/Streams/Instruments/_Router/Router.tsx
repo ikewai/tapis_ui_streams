@@ -14,7 +14,7 @@ const Router: React.FC<{ projectId: string; siteId: string }> = ({
   siteId,
 }) => {
   const { path } = useRouteMatch();
-  
+
   const [start, setStart] = useState<Date | undefined>(undefined);
   const [end, setEnd] = useState<Date | undefined>(undefined);
 

@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  PageLayout,
-  LayoutNavWrapper,
-  LayoutBody,
-} from 'tapis-ui/_common';
+import { PageLayout, LayoutNavWrapper, LayoutBody } from 'tapis-ui/_common';
 import { InstrumentsNav } from '../_components';
 import { Router } from '../_Router';
 

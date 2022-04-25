@@ -4,7 +4,7 @@ import { useList } from 'tapis-hooks/streams/instruments';
 import { Streams } from '@tapis/tapis-typescript';
 import { Navbar, NavItem } from 'tapis-ui/_wrappers/Navbar';
 import { QueryWrapper } from 'tapis-ui/_wrappers';
-import { joinPath } from "utils/URLManager";
+import { joinPath } from 'utils/URLManager';
 
 const InstrumentsNav: React.FC<{ projectId: string; siteId: string }> = ({
   projectId,
@@ -25,11 +25,7 @@ const InstrumentsNav: React.FC<{ projectId: string; siteId: string }> = ({
           definitions.map((instrument) => {
             const path = joinPath([url, instrument.inst_name!]);
             return (
-              <NavItem
-                to={path}
-                icon="project"
-                key={instrument.inst_name}
-              >
+              <NavItem to={path} icon="project" key={instrument.inst_name}>
                 {`${instrument.inst_name}`}
               </NavItem>
             );

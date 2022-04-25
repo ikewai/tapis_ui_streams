@@ -17,18 +17,18 @@ const Layout: React.FC<{
   let payload: Streams.ListMeasurementsRequest = {
     projectId,
     siteId,
-    instId: instrumentId
-  }
-  if(start) {
+    instId: instrumentId,
+  };
+  if (start) {
     payload.startDate = start.toISOString();
   }
-  if(end) {
+  if (end) {
     payload.endDate = end.toISOString();
   }
-  if(limit !== undefined) {
+  if (limit !== undefined) {
     payload.limit = limit;
   }
-  if(offset !== undefined) {
+  if (offset !== undefined) {
     payload.offset = offset;
   }
 

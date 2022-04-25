@@ -10,8 +10,8 @@ const Toolbar: React.FC<{
   setLimit: (limit: number | undefined) => void;
   setOffset: (offset: number | undefined) => void;
 }> = ({ setStart, setEnd, setLimit, setOffset, start, end }) => {
-  const [limitInput, setLimitInput] = useState<string>("");
-  const [offsetInput, setOffsetInput] = useState<string>("");
+  const [limitInput, setLimitInput] = useState<string>('');
+  const [offsetInput, setOffsetInput] = useState<string>('');
 
   const createLimit = (event: any) => {
     let value = event.target.value;
@@ -25,66 +25,68 @@ const Toolbar: React.FC<{
 
   const validateLimit = (event: any) => {
     let value: number | undefined = parseInt(event.target.value);
-    if(isNaN(value)) {
+    if (isNaN(value)) {
       value = undefined;
     }
-    if(value !== undefined && value < 1) {
+    if (value !== undefined && value < 1) {
       value = 1;
     }
-    setLimitInput(value?.toString() || "");
+    setLimitInput(value?.toString() || '');
     setLimit(value);
   };
 
   const validateOffset = (event: any) => {
     let value: number | undefined = parseInt(event.target.value);
-    if(isNaN(value)) {
+    if (isNaN(value)) {
       value = undefined;
     }
-    if(value !== undefined && value < 0) {
+    if (value !== undefined && value < 0) {
       value = 0;
     }
-    setOffsetInput(value?.toString() || "");
+    setOffsetInput(value?.toString() || '');
     setOffset(value);
   };
 
-  return <div className={styles["control-bar"]}>
-    <div className={styles["control"]}>
-      Start Date
-      <div>
-        <DateTimePicker onChange={setStart} value={start}/>
+  return (
+    <div className={styles['control-bar']}>
+      <div className={styles['control']}>
+        Start Date
+        <div>
+          <DateTimePicker onChange={setStart} value={start} />
+        </div>
+      </div>
+      <div className={styles['control']}>
+        End Date
+        <div>
+          <DateTimePicker onChange={setEnd} value={end} />
+        </div>
+      </div>
+      <div className={styles['control']}>
+        Limit
+        <div>
+          <input
+            className={styles['numeric-input']}
+            type="number"
+            value={limitInput}
+            onChange={createLimit}
+            onBlur={validateLimit}
+          />
+        </div>
+      </div>
+      <div className={styles['control']}>
+        Offset
+        <div>
+          <input
+            className={styles['numeric-input']}
+            type="number"
+            value={offsetInput}
+            onChange={createOffset}
+            onBlur={validateOffset}
+          />
+        </div>
       </div>
     </div>
-    <div className={styles["control"]}>
-      End Date
-      <div>
-        <DateTimePicker onChange={setEnd} value={end}/>
-      </div>
-    </div>
-    <div className={styles["control"]}>
-      Limit
-      <div>
-        <input
-          className={styles["numeric-input"]}
-          type="number"
-          value={limitInput}
-          onChange={createLimit}
-          onBlur={validateLimit}
-        />
-      </div>
-    </div>
-    <div className={styles["control"]}>
-      Offset
-      <div>
-        <input
-          className={styles["numeric-input"]}
-          type="number"
-          value={offsetInput}
-          onChange={createOffset}
-          onBlur={validateOffset}
-        />
-      </div>
-    </div>
-  </div>;
+  );
 };
 
 export default Toolbar;

@@ -5,7 +5,7 @@ import { useLocation } from 'react-router';
 import breadcrumbsFromPathname from 'tapis-ui/_common/Breadcrumbs/breadcrumbsFromPathname';
 import styles from './Layout.module.scss';
 
-const pathTypes = ["Projects", "Sites", "Instruments"];
+const pathTypes = ['Projects', 'Sites', 'Instruments'];
 
 const Layout: React.FC = () => {
   const { pathname } = useLocation();
@@ -15,7 +15,7 @@ const Layout: React.FC = () => {
   const header = (
     <LayoutHeader>
       <div>
-        <div className={styles["header-text"]}>{pathType}</div>
+        <div className={styles['header-text']}>{pathType}</div>
         <div className={styles.breadcrumbs}>
           <Breadcrumbs breadcrumbs={[...crumbs]} />
         </div>
@@ -23,12 +23,9 @@ const Layout: React.FC = () => {
     </LayoutHeader>
   );
 
+  const body = <Projects />;
 
-  const body = (
-    <Projects />
-  );
-  
-  return <PageLayout top={header} left={body} />
+  return <PageLayout top={header} left={body} />;
 };
 
 export default Layout;
