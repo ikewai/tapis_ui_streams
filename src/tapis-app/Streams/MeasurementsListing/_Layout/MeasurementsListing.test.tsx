@@ -34,7 +34,7 @@ describe('MeasurementsList', () => {
       ...variableProps
     } = measurements;
     for (let varName in variableProps) {
-      let capitalizedVariable = `${variable
+      let capitalizedVariable = `${varName
         .charAt(0)
         .toUpperCase()}${varName.slice(1)}`;
       expect(getAllByText(capitalizedVariable).length).toEqual(1);
