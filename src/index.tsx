@@ -7,7 +7,7 @@ import TapisProvider from 'tapis-hooks/provider';
 import 'tapis-ui/index.css';
 
 ReactDOM.render(
-  <TapisProvider basePath="https://training.tapis.io">
+  <TapisProvider basePath="https://dev.develop.tapis.io">
     <Router>
       <App />
     </Router>
