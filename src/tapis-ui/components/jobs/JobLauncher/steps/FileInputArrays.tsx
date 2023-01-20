@@ -1,11 +1,7 @@
 import React, { useMemo, useCallback } from 'react';
 import { Apps, Files, Jobs } from '@tapis/tapis-typescript';
 import { Input, Button, FormGroup } from 'reactstrap';
-import {
-  useJobLauncher,
-  StepSummaryField,
-  FormikJobStepWrapper,
-} from '../components';
+import { useJobLauncher, StepSummaryField } from '../components';
 import {
   generateFileInputArrayFromAppInput,
   getIncompleteJobInputArrays,
@@ -32,6 +28,7 @@ import arrayStyles from './FileInputArrays.module.scss';
 import styles from './FileInputs.module.scss';
 import fieldArrayStyles from '../FieldArray.module.scss';
 import formStyles from 'tapis-ui/_common/FieldWrapperFormik/FieldWrapperFormik.module.css';
+import { JobStep } from '..';
 
 export type FieldWrapperProps = {
   fileInputArrayIndex: number;
@@ -112,13 +109,7 @@ const SourceUrlsField: React.FC<FieldWrapperProps> = ({
           + Browse for Files
         </Button>
       </div>
-      {modal && (
-        <FileSelectModal
-          toggle={close}
-          selectMode={{ mode: 'multi', types: ['file', 'dir'] }}
-          onSelect={onSelect}
-        />
-      )}
+      {modal && <FileSelectModal toggle={close} onSelect={onSelect} />}
     </FormGroup>
   );
 };
@@ -178,7 +169,6 @@ const JobInputArrayField: React.FC<JobInputArrayFieldProps> = ({
             label="Source URLs"
             required={true}
             description="Input TAPIS files as pathnames, TAPIS URIs or web URLs"
-            key={uuidv4()}
           >
             <SourceUrlsField
               fileInputArrayIndex={index}
@@ -342,12 +332,12 @@ const FixedInputArray: React.FC<{ inputArray: Apps.AppFileInputArray }> = ({
         required={true}
         description="Input TAPIS files as pathnames, TAPIS URIs or web URLs"
       >
-        {inputArray.sourceUrls?.map((sourceUrl) => (
+        {inputArray.sourceUrls?.map((sourceUrl, index) => (
           <Input
             bsSize="sm"
             defaultValue={sourceUrl}
             disabled={true}
-            key={uuidv4()}
+            key={`fixed-input-array-${inputArray.name}-${index}`}
           />
         ))}
       </FieldWrapper>
@@ -432,7 +422,7 @@ const JobInputArrays: React.FC<{ arrayHelpers: FieldArrayRenderProps }> = ({
           item={jobInputArray}
           index={index}
           remove={arrayHelpers.remove}
-          key={`fileInputArrays.${index}`}
+          key={`render-fileInputArrays.${index}`}
         />
       ))}
       <Button onClick={() => arrayHelpers.push({ sourceUrls: [''] })} size="sm">
@@ -443,38 +433,14 @@ const JobInputArrays: React.FC<{ arrayHelpers: FieldArrayRenderProps }> = ({
 };
 
 export const FileInputArrays: React.FC = () => {
-  const { job } = useJobLauncher();
-
-  const validationSchema = Yup.object().shape({
-    fileInputArrays: Yup.array().of(
-      Yup.object().shape({
-        name: Yup.string().min(1).required('A fileInputArray name is required'),
-        sourceUrls: Yup.array(
-          Yup.string().min(1).required('A sourceUrl is required')
-        ).min(1),
-        targetDir: Yup.string().min(1).required('A targetDir is required'),
-      })
-    ),
-  });
-
-  const initialValues = useMemo(
-    () => ({
-      fileInputArrays: job.fileInputArrays,
-    }),
-    [job]
-  );
-
   return (
-    <FormikJobStepWrapper
-      validationSchema={validationSchema}
-      initialValues={initialValues}
-    >
+    <div>
+      <h2>File Input Arrays</h2>
       <FieldArray
         name="fileInputArrays"
         render={(arrayHelpers) => {
           return (
             <>
-              <h3>File Input Arrays</h3>
               <JobInputArrays arrayHelpers={arrayHelpers} />
               <OptionalInputArrays arrayHelpers={arrayHelpers} />
               <FixedInputArrays />
@@ -482,7 +448,7 @@ export const FileInputArrays: React.FC = () => {
           );
         }}
       />
-    </FormikJobStepWrapper>
+    </div>
   );
 };
 
@@ -549,3 +515,28 @@ export const FileInputArraysSummary: React.FC = () => {
     </div>
   );
 };
+
+const validationSchema = Yup.object().shape({
+  fileInputArrays: Yup.array().of(
+    Yup.object().shape({
+      name: Yup.string().min(1).required('A fileInputArray name is required'),
+      sourceUrls: Yup.array(
+        Yup.string().min(1).required('A sourceUrl is required')
+      ).min(1),
+      targetDir: Yup.string().min(1).required('A targetDir is required'),
+    })
+  ),
+});
+
+const step: JobStep = {
+  id: 'fileInputArrays',
+  name: 'File Input Arrays',
+  render: <FileInputArrays />,
+  summary: <FileInputArraysSummary />,
+  validationSchema,
+  generateInitialValues: ({ job }) => ({
+    fileInputArrays: job.fileInputArrays,
+  }),
+};
+
+export default step;
