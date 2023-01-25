@@ -44,7 +44,7 @@
     "web-vitals": "^1.1.2",
     "yup": "^0.32.11"
   },
-  "homepage": "https://ikewai.github.io/tapis_ui_streams_training_deploy/",
+  "homepage": "https://ikewai.github.io/tapis_ui_streams/",
   "scripts": {
     "start": "CHOKIDAR_USEPOLLING=true react-scripts start",
     "build": "react-scripts build",
